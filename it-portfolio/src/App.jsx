@@ -261,7 +261,7 @@ const App = () => {
                 <h3 className="text-2xl font-black mb-2 flex items-center gap-3">
                   <GraduationCap size={32} /> Học vấn & Chứng chỉ
                 </h3>
-                <p className="text-blue-100">Bằng cấp chuyên môn và năng lực ngoại ngữ (TOEIC 860).</p>
+                <p className="text-blue-100">Bằng cấp chuyên môn và năng lực ngoại ngữ.</p>
               </div>
               <div className="flex flex-wrap gap-3 max-w-2xl justify-end">
                 {certifications.map((cert, i) => (
