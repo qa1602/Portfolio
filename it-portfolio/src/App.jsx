@@ -22,14 +22,14 @@ import {
   CheckCircle,
   Globe
 } from 'lucide-react';
-
+import avatarImg from './assets/image.jpg'
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
   const [lang, setLang] = useState('vi'); // 'vi' or 'en'
 
-  const avatarSrc = './assets/image.jpg';
+  const avatarSrc = {avatarImg}
 
   const content = {
     vi: {
