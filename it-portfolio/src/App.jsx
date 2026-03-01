@@ -29,8 +29,6 @@ const App = () => {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
   const [lang, setLang] = useState('vi'); // 'vi' or 'en'
 
-  const avatarSrc = {avatarImg}
-
   const content = {
     vi: {
       nav: [
@@ -343,7 +341,7 @@ const App = () => {
             className="text-xl font-bold flex items-center gap-2 text-blue-700 cursor-pointer group" 
             onClick={() => scrollTo('home')}
           >
-            <Terminal size={24} className="group-hover:animate-pulse" /> QA_PORTFOLIO
+            <Terminal size={24} className="group-hover:animate-pulse" /> Quoc Anh Portfolio
           </span>
           <div className="hidden md:flex items-center space-x-8">
             {currentContent.nav.map((item) => (
