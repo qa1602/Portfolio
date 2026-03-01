@@ -434,7 +434,7 @@ const App = () => {
             <div className="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-indigo-50 rounded-[3.5rem] -rotate-3 transition-transform duration-500 hover:rotate-0"></div>
             <div className="relative aspect-[4/5] bg-slate-200 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
               <img 
-                src={avatarSrc}
+                src={avatarImg}
                 alt="Phạm Quốc Anh" 
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" 
               />
