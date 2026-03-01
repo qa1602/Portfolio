@@ -26,12 +26,12 @@ import {
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [formState, setFormState] = useState('idle'); 
-  const [lang, setLang] = useState('vi'); 
+  const [formState, setFormState] = useState('idle'); // idle, submitting, success
+  const [lang, setLang] = useState('vi'); // 'vi' or 'en'
 
-  const localAvatarImg = "/assets/image.jpg";
-  
   const webAvatarFallback = "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800";
+  
+  const [avatarSrc, setAvatarSrc] = useState('./assets/image.jpg');
 
   const content = {
     vi: {
@@ -440,10 +440,13 @@ const App = () => {
             <div className="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-indigo-50 rounded-[3.5rem] -rotate-3 transition-transform duration-500 hover:rotate-0"></div>
             <div className="relative aspect-[4/5] bg-slate-200 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
               <img 
-                src={localAvatarImg}
-                onError={(e) => { 
-                  e.target.onerror = null; // Tránh vòng lặp vô hạn nếu ảnh fallback cũng lỗi
-                  e.target.src = webAvatarFallback; 
+                src={avatarSrc}
+                onError={() => { 
+                  // Khi ảnh local (ví dụ: ./assets/image.jpg) bị lỗi không tải được,
+                  // tiến hành gọi setAvatarSrc để đổi sang đường link web dự phòng.
+                  if (avatarSrc !== webAvatarFallback) {
+                    setAvatarSrc(webAvatarFallback);
+                  }
                 }} 
                 alt="Phạm Quốc Anh" 
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" 
