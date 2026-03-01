@@ -29,9 +29,7 @@ const App = () => {
   const [formState, setFormState] = useState('idle'); // idle, submitting, success
   const [lang, setLang] = useState('vi'); // 'vi' or 'en'
 
-  const webAvatarFallback = "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800";
-  
-  const [avatarSrc, setAvatarSrc] = useState('./assets/image.jpg');
+  const avatarSrc = './assets/image.jpg';
 
   const content = {
     vi: {
@@ -274,7 +272,6 @@ const App = () => {
 
   const currentContent = content[lang];
 
-  // Thông tin cá nhân cố định
   const personalInfo = {
     name: "Phạm Quốc Anh",
     email: "phquocanhtdtu@gmail.com",
@@ -284,21 +281,18 @@ const App = () => {
     linkedin: "https://linkedin.com/in/qa1602", 
   };
 
-  // Icons cho skill groups
   const skillIcons = [
     <Server className="text-blue-600" size={24} />,
     <Network className="text-blue-600" size={24} />,
     <PenTool className="text-blue-600" size={24} />
   ];
 
-  // Icons cho projects
   const projectIcons = [
     <Camera size={24} className="currentColor" />,
     <FileCode size={24} className="currentColor" />,
     <Headset size={24} className="currentColor" />
   ];
 
-  // Hình ảnh mô phỏng công việc cho projects
   const projectImages = [
     "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800", // Hạ tầng / Camera
     "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800", // Code / Scripting
@@ -441,13 +435,6 @@ const App = () => {
             <div className="relative aspect-[4/5] bg-slate-200 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
               <img 
                 src={avatarSrc}
-                onError={() => { 
-                  // Khi ảnh local (ví dụ: ./assets/image.jpg) bị lỗi không tải được,
-                  // tiến hành gọi setAvatarSrc để đổi sang đường link web dự phòng.
-                  if (avatarSrc !== webAvatarFallback) {
-                    setAvatarSrc(webAvatarFallback);
-                  }
-                }} 
                 alt="Phạm Quốc Anh" 
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" 
               />
