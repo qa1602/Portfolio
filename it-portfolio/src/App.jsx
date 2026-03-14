@@ -10,10 +10,9 @@ import {
   MapPin,
   Download,
   Server,
-  Network,
   CheckCircle2,
   Terminal,
-  PenTool,
+  Monitor,
   GraduationCap,
   Camera,
   FileCode,
@@ -26,8 +25,8 @@ import avatarImg from './assets/image.jpg'
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [formState, setFormState] = useState('idle'); // idle, submitting, success
-  const [lang, setLang] = useState('vi'); // 'vi' or 'en'
+  const [formState, setFormState] = useState('idle'); 
+  const [lang, setLang] = useState('vi');
 
   const content = {
     vi: {
@@ -41,15 +40,15 @@ const App = () => {
       hero: {
         ready: "Sẵn sàng làm việc",
         role1: "IT Helpdesk",
-        role2: "Specialist",
+        role2: "Professional",
         greeting: "Xin chào, tôi là",
-        bio: "Chuyên viên IT với nền tảng Kỹ thuật phần mềm vững chắc (ĐH Tôn Đức Thắng). Chuyên môn hóa trong việc hỗ trợ kỹ thuật từ xa (Remote Support), thiết kế hạ tầng mạng/CCTV và tự động hóa các tác vụ xử lý sự cố (Scripting). Mục tiêu ngắn hạn: Tối ưu hóa quy trình IT Helpdesk, hướng tới vị trí System Engineer.",
+        bio: "Chuyên viên IT Support với nền tảng kỹ thuật vững chắc (ĐH Tôn Đức Thắng). Đam mê giải quyết sự cố và hỗ trợ người dùng cuối (End-user) tối ưu hóa hiệu suất làm việc. Có thế mạnh về Remote Support, quản lý tài sản IT, xử lý lỗi mạng cơ bản và tự động hóa quy trình bằng Script. Mục tiêu: Trở thành System Administrator chuyên nghiệp.",
         contactBtn: "Liên hệ ngay",
         downloadBtn: "Tải hồ sơ năng lực"
       },
       stats: {
-        target: "SLA Target",
-        remote: "Remote"
+        target: "SLA Đạt",
+        remote: "Remote Support"
       },
       skills: {
         title: "Năng lực cốt lõi",
@@ -58,30 +57,30 @@ const App = () => {
         eduSubtitle: "Nền tảng kiến thức vững chắc làm cơ sở để tiếp cận nhanh các công nghệ và quy trình mới.",
         groups: [
           { 
-            name: "IT Support & System", 
+            name: "Hardware & OS Support", 
             items: [
-              "Hỗ trợ End-user (90% Remote Support)", 
+              "Hỗ trợ End-user (On-site & Remote)", 
               "Xử lý sự cố PC, Máy in, Máy chấm công", 
-              "Viết Batch Script tự động hóa (Backup, Spooler...)", 
-              "Active Directory & Cloud (Foundation)"
+              "Cài đặt & tối ưu Windows, macOS, Linux", 
+              "Quản lý tài sản phần cứng & phần mềm"
             ] 
           },
           { 
-            name: "Networking & IoT", 
+            name: "System & Network", 
             items: [
-              "Thiết kế bản vẽ hạ tầng trên AutoCAD", 
-              "Cấu hình thiết bị mạng Ruijie, NAT Port", 
-              "Vận hành thiết bị IoT, truyền dữ liệu SFTP", 
-              "Quản lý Ticket & SLA (hệ thống AMIS)"
+              "Quản trị Office 365, Google Workspace", 
+              "Kiến thức Active Directory cơ bản", 
+              "Thiết lập mạng LAN/WAN, Wifi, VPN", 
+              "Cấu hình Router/Switch"
             ] 
           },
           { 
-            name: "Web & Testing", 
+            name: "IT Service & Tools", 
             items: [
-              "Manual Testing cho Website Products",
-              "Quản trị nội dung WordPress CMS", 
-              "Adobe Photoshop & Canva Pro", 
-              "Figma (Basic UI/UX Design)"
+              "Quản lý Ticket (AMIS, Jira, ServiceDesk)",
+              "Viết Batch Script tự động hóa IT Helpdesk", 
+              "Kiến thức cơ bản về quy trình ITIL", 
+              "Giao tiếp & hỗ trợ khách hàng bằng Tiếng Anh"
             ] 
           }
         ],
@@ -97,9 +96,9 @@ const App = () => {
         subtitle: "Những nhiệm vụ thực tế chứng minh năng lực kỹ thuật và giải quyết vấn đề",
         items: [
           {
-            title: "Triển khai Hạ tầng Camera ZARA",
-            description: "Phụ trách thiết kế và quy hoạch hạ tầng cho cửa hàng thời trang ZARA tại TTTM Hà Nội. Sử dụng AutoCAD để bố trí sơ đồ cho hơn 100 camera, hệ thống switch, vị trí tủ rack IT và hướng đi cáp tín hiệu tối ưu nhất.",
-            tech: ["AutoCAD", "CCTV System", "Network Design"]
+            title: "Setup Hạ tầng IT Cửa hàng ZARA",
+            description: "Tham gia triển khai hạ tầng CNTT cho cửa hàng ZARA tại TTTM Hà Nội. Phụ trách lắp đặt và cấu hình PC, hệ thống POS, máy in, hơn 100 camera, cùng hệ thống Switch và mạng nội bộ cho cửa hàng.",
+            tech: ["Hardware Setup", "Network", "POS/CCTV"]
           },
           {
             title: "Script Tự động hóa IT Helpdesk",
@@ -108,7 +107,7 @@ const App = () => {
           },
           {
             title: "Quản lý SLA & Hỗ trợ Khách hàng",
-            description: "Điều phối và xử lý 15-20 ticket/tuần qua hệ thống AMIS. Hỗ trợ 20% cho nội bộ và 80% cho khách hàng ngoài (chủ yếu qua Remote). Trực tiếp làm việc với hãng nước ngoài bằng Tiếng Anh, duy trì tỉ lệ đáp ứng SLA luôn >90% trong ngày.",
+            description: "Tiếp nhận, điều phối và xử lý 15-20 ticket/tuần qua hệ thống AMIS. Phân loại sự cố, hỗ trợ giải quyết qua Remote/On-site. Trực tiếp làm việc với đối tác nước ngoài bằng Tiếng Anh, đảm bảo SLA >90%.",
             tech: ["SLA >90%", "AMIS Ticket", "Remote Support"]
           }
         ]
@@ -119,15 +118,15 @@ const App = () => {
         items: [
           {
             company: "CÔNG TY TNHH TMDV CÔNG NGHỆ SÁNG TẠO",
-            role: "Technical Support",
+            role: "IT Helpdesk Specialist",
             period: "Tháng 06/2025 - Hiện tại",
-            desc: "Hỗ trợ 20% nội bộ và 80% khách hàng doanh nghiệp. Quản lý thiết bị (camera, máy tính, máy in). Cấu hình router Ruijie, NAT port. Giám sát hệ thống IoT đếm người (giao thức SFTP). Xử lý trung bình 15-20 ticket/tuần, đảm bảo SLA >90% trong ngày."
+            desc: "Hỗ trợ kỹ thuật cho người dùng nội bộ và khách hàng doanh nghiệp. Quản lý tài sản IT (máy tính, máy in, CCTV). Cấu hình router, xử lý lỗi LAN/Wifi. Tạo tài liệu hướng dẫn (KB) cho người dùng. Đảm bảo tỷ lệ hoàn thành Ticket (SLA) luôn >90%."
           },
           {
             company: "CÔNG TY TNHH CÔNG NGHỆ SỐ NAM PHƯƠNG",
-            role: "IT Tester Intern",
+            role: "Software Support Intern",
             period: "Tháng 05/2024 - Tháng 09/2024",
-            desc: "Thực hiện Manual Test cho các sản phẩm Website công nghệ mới. Lập báo cáo lỗi hệ thống chi tiết cho đội Dev và đề xuất các phương án tối ưu hóa trải nghiệm người dùng (End-user)."
+            desc: "Tiếp nhận các lỗi phần mềm từ người dùng cuối, tái tạo sự cố và lập báo cáo chi tiết cho đội Dev. Đề xuất các phương án tối ưu hóa UX/UI. Hỗ trợ setup môi trường làm việc (phần mềm/hệ điều hành) cho nhân viên mới."
           }
         ]
       },
@@ -159,15 +158,15 @@ const App = () => {
       hero: {
         ready: "Available for work",
         role1: "IT Helpdesk",
-        role2: "Specialist",
+        role2: "Professional",
         greeting: "Hello, I am",
-        bio: "IT Specialist with a solid Software Engineering background (Ton Duc Thang University). Specialized in Remote Support, Network/CCTV infrastructure design, and troubleshooting automation (Scripting). Short-term goal: Optimize IT Helpdesk processes, aiming for a System Engineer position.",
+        bio: "IT Support Specialist with a solid technical foundation (Ton Duc Thang University). Passionate about troubleshooting and supporting end-users to optimize their workflow. Strong in Remote Support, IT asset management, network troubleshooting, and task automation. Goal: To become a System Administrator.",
         contactBtn: "Contact Me",
         downloadBtn: "Download Resume"
       },
       stats: {
-        target: "SLA Target",
-        remote: "Remote"
+        target: "SLA Achieved",
+        remote: "Remote Support"
       },
       skills: {
         title: "Core Competencies",
@@ -176,30 +175,30 @@ const App = () => {
         eduSubtitle: "Solid knowledge foundation to quickly adapt to new technologies and processes.",
         groups: [
           { 
-            name: "IT Support & System", 
+            name: "Hardware & OS Support", 
             items: [
-              "End-user Support (90% Remote Support)", 
+              "End-user Support (On-site & Remote)", 
               "Troubleshoot PCs, Printers, Timekeepers", 
-              "Write Automation Batch Scripts (Backup, Spooler...)", 
-              "Active Directory & Cloud (Foundation)"
+              "Install & Optimize Windows, macOS, Linux", 
+              "IT Asset & Inventory Management"
             ] 
           },
           { 
-            name: "Networking & IoT", 
+            name: "System & Network", 
             items: [
-              "Infrastructure drawing design on AutoCAD", 
-              "Configure Ruijie network devices, NAT Port", 
-              "Operate IoT devices, SFTP data transmission", 
-              "Manage Tickets & SLA (AMIS system)"
+              "Office 365, Google Workspace Admin", 
+              "Basic Active Directory Knowledge", 
+              "LAN/WAN, Wi-Fi, VPN Setup", 
+              "Router/Switch Config (Ruijie, Draytek)"
             ] 
           },
           { 
-            name: "Web & Testing", 
+            name: "IT Service & Tools", 
             items: [
-              "Manual Testing for Website Products",
-              "WordPress CMS Content Administration", 
-              "Adobe Photoshop & Canva Pro", 
-              "Figma (Basic UI/UX Design)"
+              "Ticket Management (AMIS, Jira, ServiceDesk)",
+              "IT Helpdesk Automation Scripts (Batch)", 
+              "Basic knowledge of ITIL framework", 
+              "English Communication & Customer Service"
             ] 
           }
         ],
@@ -215,9 +214,9 @@ const App = () => {
         subtitle: "Practical tasks demonstrating technical and problem-solving skills",
         items: [
           {
-            title: "ZARA CCTV Infrastructure",
-            description: "In charge of designing and planning infrastructure for the ZARA fashion store in Hanoi Mall. Used AutoCAD to layout diagrams for over 100 cameras, switch systems, IT rack locations, and optimized signal cable routing.",
-            tech: ["AutoCAD", "CCTV System", "Network Design"]
+            title: "ZARA IT Infrastructure Setup",
+            description: "Participated in deploying IT infrastructure for the ZARA store in Hanoi. Installed and configured PCs, POS systems, printers, over 100 cameras, Switches, and internal networking.",
+            tech: ["Hardware Setup", "Network", "POS/CCTV"]
           },
           {
             title: "IT Helpdesk Automation Scripts",
@@ -226,7 +225,7 @@ const App = () => {
           },
           {
             title: "SLA Management & Support",
-            description: "Coordinated and resolved 15-20 tickets/week via the AMIS system. Provided 20% internal support and 80% external client support (mostly Remote). Communicated directly with foreign vendors in English, maintaining a daily SLA compliance rate of >90%.",
+            description: "Received and resolved 15-20 tickets/week via the AMIS system. Classified issues and provided Remote/On-site support. Communicated with foreign partners in English, ensuring a >90% SLA rate.",
             tech: ["SLA >90%", "AMIS Ticket", "Remote Support"]
           }
         ]
@@ -237,15 +236,15 @@ const App = () => {
         items: [
           {
             company: "CONG TY TNHH TMDV CONG NGHE SANG TAO",
-            role: "Technical Support",
+            role: "IT Helpdesk Specialist",
             period: "Jun 2025 - Present",
-            desc: "Supported 20% internal users and 80% corporate clients. Managed devices (CCTV, PCs, printers). Configured Ruijie routers, NAT ports. Monitored IoT systems (SFTP protocol). Resolved an average of 15-20 tickets/week, ensuring >90% daily SLA compliance."
+            desc: "Provided technical support for internal users and corporate clients. Managed IT assets (PCs, printers, CCTV). Configured routers and resolved LAN/Wi-Fi issues. Created KB docs for end-users. Maintained >90% SLA compliance."
           },
           {
             company: "CONG TY TNHH CONG NGHE SO NAM PHUONG",
-            role: "IT Tester Intern",
+            role: "Software Support Intern",
             period: "May 2024 - Sep 2024",
-            desc: "Conducted Manual Testing for newly developed technology websites. Created detailed system bug reports for the Dev team and proposed solutions to optimize the End-user experience."
+            desc: "Received software bug reports from end-users, reproduced issues, and provided detailed logs to the Dev team. Proposed UX/UI optimizations. Assisted in setting up workstations/OS for new employees."
           }
         ]
       },
@@ -280,9 +279,9 @@ const App = () => {
   };
 
   const skillIcons = [
+    <Monitor className="text-blue-600" size={24} />,
     <Server className="text-blue-600" size={24} />,
-    <Network className="text-blue-600" size={24} />,
-    <PenTool className="text-blue-600" size={24} />
+    <Headset className="text-blue-600" size={24} />
   ];
 
   const projectIcons = [
@@ -292,9 +291,9 @@ const App = () => {
   ];
 
   const projectImages = [
-    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800", // Hạ tầng / Camera
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800", // Code / Scripting
-    "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800"  // Support / Helpdesk
+    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800", 
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+    "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800"  
   ];
 
   useEffect(() => {
