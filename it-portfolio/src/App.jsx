@@ -318,13 +318,33 @@ const App = () => {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormState('submitting');
-    setTimeout(() => {
-      setFormState('success');
-      setTimeout(() => setFormState('idle'), 3000);
-    }, 1500);
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", "0edeaf9d-0b4c-443d-89ae-a588402f432a"); 
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setFormState('success');
+        e.target.reset(); // Xóa trắng form sau khi gửi
+        setTimeout(() => setFormState('idle'), 4000);
+      } else {
+        setFormState('idle');
+        alert(lang === 'vi' ? "Có lỗi xảy ra, vui lòng thử lại!" : "Something went wrong, please try again!");
+      }
+    } catch (error) {
+      console.error(error);
+      setFormState('idle');
+      alert(lang === 'vi' ? "Lỗi kết nối máy chủ!" : "Server connection error!");
+    }
   };
 
   const toggleLanguage = () => {
@@ -632,19 +652,21 @@ const App = () => {
                 </div>
               ) : (
                 <form className="space-y-6" onSubmit={handleFormSubmit}>
+                  {/* Thêm input ẩn này để tùy chỉnh tiêu đề email gửi về */}
+                  <input type="hidden" name="subject" value="[Từ Portfolio] Yêu cầu hỗ trợ IT mới" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase text-slate-400 tracking-wider">{currentContent.contact.formName}</label>
-                      <input required type="text" placeholder={currentContent.contact.formPlaceholderName} className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all placeholder:text-slate-600" />
+                      <input name="name" required type="text" placeholder={currentContent.contact.formPlaceholderName} className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all placeholder:text-slate-600" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase text-slate-400 tracking-wider">{currentContent.contact.formEmail}</label>
-                      <input required type="email" placeholder="email@company.com" className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all placeholder:text-slate-600" />
+                      <input name="email" required type="email" placeholder="email@company.com" className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all placeholder:text-slate-600" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase text-slate-400 tracking-wider">{currentContent.contact.formDesc}</label>
-                    <textarea required rows="4" placeholder={currentContent.contact.formPlaceholderDesc} className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all resize-none placeholder:text-slate-600"></textarea>
+                    <textarea name="message" required rows="4" placeholder={currentContent.contact.formPlaceholderDesc} className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-blue-500 focus:bg-white/10 outline-none transition-all resize-none placeholder:text-slate-600"></textarea>
                   </div>
                   <button 
                     disabled={formState === 'submitting'}
